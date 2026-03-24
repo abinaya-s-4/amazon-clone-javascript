@@ -10,6 +10,7 @@ if(!cart){
 }
 
 
+
 function saveData(){
   localStorage.setItem('cart', JSON.stringify(cart));
 }
