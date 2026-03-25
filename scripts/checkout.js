@@ -1,4 +1,5 @@
-import {cart, removeFromCart, deliveryOption  } from '../data/cart.js';
+import {cart, removeFromCart} from '../data/cart.js';
+import { deliveryOption } from '../data/deliveryOptions.js';
 import {product} from '../data/products.js'
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
@@ -45,44 +46,8 @@ cart.forEach((cartItem)=>{
         <div class="delivery-options-title">
           Choose a delivery option:
         </div>
-        <div class="delivery-option">
-          <input type="radio" checked
-            class="delivery-option-input"
-            name="delivery-option-${matchingProduct.id}">
-          <div>
-            <div class="delivery-option-date">
-              Tuesday, June 21
-            </div>
-            <div class="delivery-option-price">
-              FREE Shipping
-            </div>
-          </div>
+        ${deliveryOptionHTML(matchingProduct)}
         </div>
-        <div class="delivery-option">
-          <input type="radio"
-            class="delivery-option-input"
-            name="delivery-option-${matchingProduct.id}">
-          <div>
-            <div class="delivery-option-date">
-              Wednesday, June 15
-            </div>
-            <div class="delivery-option-price">
-              $4.99 - Shipping
-            </div>
-          </div>
-        </div>
-        <div class="delivery-option">
-          <input type="radio"
-            class="delivery-option-input"
-            name="delivery-option-${matchingProduct.id}">
-          <div>
-            <div class="delivery-option-date">
-              Monday, June 13
-            </div>
-            <div class="delivery-option-price">
-              $9.99 - Shipping
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -104,16 +69,16 @@ cart.forEach((cartItem)=>{
 
   });
   
-  function deliveryOption(matchingProduct){
+  function deliveryOptionHTML(matchingProduct){
     let deliveryOptionHTML = ``
 
-    deliveryOption.forEach((deliveryItem)=>{
+    deliveryOption.forEach((deliveryItem) => {
       const today = dayjs();
-      const deliveryDate = today.add(${deliveryItem.days}, 'days');
-      const deliveryString = deliveryDate.format('dddd,MMMM,D');
+      const deliveryDate = today.add( deliveryItem.days, 'days');
+      const deliveryString = deliveryDate.format('dddd, MMMM, D');
       const priceString = deliveryItem.price === 0
         ? 'FREE'
-        : `$${formatCurrency(deliveryItem.price)} -`;
+        : `₹${(deliveryItem.price)} -`;
 
         deliveryOptionHTML += `
         
