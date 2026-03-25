@@ -46,7 +46,7 @@ cart.forEach((cartItem)=>{
         <div class="delivery-options-title">
           Choose a delivery option:
         </div>
-        ${deliveryOptionHTML(matchingProduct)}
+        ${deliveryOptionHTML(matchingProduct, cartItem)}
         </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ cart.forEach((cartItem)=>{
 
   });
   
-  function deliveryOptionHTML(matchingProduct){
+  function deliveryOptionHTML(matchingProduct, cartItem){
     let deliveryOptionHTML = ``
 
     deliveryOption.forEach((deliveryItem) => {
@@ -77,13 +77,14 @@ cart.forEach((cartItem)=>{
       const deliveryDate = today.add( deliveryItem.days, 'days');
       const deliveryString = deliveryDate.format('dddd, MMMM, D');
       const priceString = deliveryItem.price === 0
-        ? 'FREE'
+        ? 'FREE-'
         : `₹${(deliveryItem.price)} -`;
 
+        const ischecked = deliveryItem.id === cartItem.deliveryOptionId; // value will be true or false
         deliveryOptionHTML += `
         
         <div class="delivery-option">
-          <input type="radio" checked
+          <input type="radio" ${ischecked ? 'checked' : '' } 
             class="delivery-option-input"
             name="delivery-option-${matchingProduct.id}">
           <div>
@@ -91,7 +92,7 @@ cart.forEach((cartItem)=>{
               ${deliveryString}
             </div>
             <div class="delivery-option-price">
-              ${priceString}
+              ${priceString} Shipping
             </div>
           </div>
         </div>
