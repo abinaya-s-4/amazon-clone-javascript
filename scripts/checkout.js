@@ -25,9 +25,6 @@ cart.forEach((cartItem)=>{
       const deliveryDate = today.add( deliveryDateId.days, 'days');
       const deliveryString = deliveryDate.format('dddd, MMMM, D');
 
-    
-
-  
   cartHTML += ` <div class="cart-item-container js-remove-cart-${matchingProduct.id}">
     <div class="delivery-date">
       Delivery date: ${deliveryString}
